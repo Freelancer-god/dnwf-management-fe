@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { ModalProvider } from '@/components/modal/provider';
-import { Toaster } from 'sonner';
+import { ModalProvider } from "@/components/modal/provider";
+import { Toaster } from "sonner";
 
 export function Providers({ children }: { children: React.ReactNode }) {
   return (

@@ -53,3 +53,12 @@ export const toDateString = (date: Date) => {
 export const random = (min: number, max: number) => {
   return Math.floor(Math.random() * (max - min + 1) + min);
 };
+
+export function capitalizeFirstLetter(words: string) {
+  return words.charAt(0).toUpperCase() + words.slice(1);
+}
+
+export const getLastPathSegment = (path: string) => {
+  const segments = path.split("/").filter((segment) => segment);
+  return segments.length > 0 ? `/${segments[segments.length - 1]}` : "/";
+};

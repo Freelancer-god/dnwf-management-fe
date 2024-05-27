@@ -65,15 +65,15 @@ const BreadcrumbPage = React.forwardRef<HTMLSpanElement, React.ComponentPropsWit
 );
 BreadcrumbPage.displayName = "BreadcrumbPage";
 
-const BreadcrumbSeparator = ({ children, className, ...props }: React.ComponentProps<"li">) => (
-  <li
+const BreadcrumbSeparator = ({ children, className, ...props }: React.ComponentProps<"div">) => (
+  <div
     role="presentation"
     aria-hidden="true"
     className={cn("[&>svg]:size-3.5", className)}
     {...props}
   >
     {children ?? <ChevronRight />}
-  </li>
+  </div>
 );
 BreadcrumbSeparator.displayName = "BreadcrumbSeparator";
 

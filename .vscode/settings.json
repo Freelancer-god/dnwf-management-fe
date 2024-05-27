@@ -1,6 +1,7 @@
 {
-    "editor.codeActionsOnSave": {
-        "source.organizeImports": "always",
-        "source.fixAll": "always"
-    },
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "never"
+  },
+  "explorer.sortOrder": "type"
 }

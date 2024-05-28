@@ -57,8 +57,3 @@ export const random = (min: number, max: number) => {
 export function capitalizeFirstLetter(words: string) {
   return words.charAt(0).toUpperCase() + words.slice(1);
 }
-
-export const getLastPathSegment = (path: string) => {
-  const segments = path.split("/").filter((segment) => segment);
-  return segments.length > 0 ? `/${segments[segments.length - 1]}` : "/";
-};

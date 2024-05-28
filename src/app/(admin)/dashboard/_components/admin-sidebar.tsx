@@ -3,7 +3,7 @@ import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
 import SubnavDropdown from "@/components/subnav-dropdown";
-import { SIDEBAR_ITEMS } from "@/constants/constants";
+import { SIDEBAR_ITEMS } from "@/lib/constants";
 
 export default function AdminSidebar() {
   return (

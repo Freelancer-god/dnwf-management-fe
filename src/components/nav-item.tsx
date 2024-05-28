@@ -1,6 +1,6 @@
 "use client";
 import { cn } from "@/lib/utils";
-import { MenuItem } from "@/validations/menu-item-validation";
+import { MenuItem } from "@/types/menu-item";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 

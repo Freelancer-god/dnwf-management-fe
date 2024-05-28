@@ -6,7 +6,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { MenuItem } from "@/validations/menu-item-validation";
+import { MenuItem } from "@/types/menu-item";
 
 export default function SubnavDropdown({ item }: { item: MenuItem }) {
   const hasSubNav = item.subItems && item.subItems.length > 0;

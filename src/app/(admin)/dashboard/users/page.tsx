@@ -1,5 +1,5 @@
 import CreateButton from "@/components/create-button";
-import { CardWithForm } from "@/components/form-card";
+import CardWithForm from "@/components/form/card-with-form";
 import { DataTableDemo } from "@/components/generic-table";
 import { Button } from "@/components/ui/button";
 import { getUsers } from "@/services/user-service";
@@ -12,7 +12,7 @@ export default async function UsersPage() {
       <div className="flex items-center justify-between">
         <h1 className="text-lg font-semibold md:text-2xl">Users</h1>
         <CreateButton label="Create New User">
-          <CardWithForm />
+          <CardWithForm formId="create-user-form" />
         </CreateButton>
       </div>
       {users.length > 0 ? <DataTableDemo data={users} /> : <EmptyUser />}

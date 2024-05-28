@@ -1,11 +1,12 @@
 "use client";
-import NavItem, { MenuItem } from "@/components/nav-item";
+import NavItem from "@/components/nav-item";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { MenuItem } from "@/validations/menu-item-validation";
 
 export default function SubnavDropdown({ item }: { item: MenuItem }) {
   const hasSubNav = item.subItems && item.subItems.length > 0;

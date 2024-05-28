@@ -1,4 +1,4 @@
-import { MenuItem } from "@/components/nav-item";
+import { MenuItem } from "@/validations/menu-item-validation";
 import { GroupIcon, Home, User } from "lucide-react";
 
 export const SIDEBAR_ITEMS: MenuItem[] = [

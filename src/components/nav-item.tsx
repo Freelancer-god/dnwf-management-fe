@@ -1,15 +1,8 @@
 "use client";
 import { cn } from "@/lib/utils";
+import { MenuItem } from "@/validations/menu-item-validation";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ReactNode } from "react";
-
-export interface MenuItem {
-  href: string;
-  label: string;
-  icon: ReactNode;
-  subItems?: MenuItem[];
-}
 
 export default function NavItem({ className, item }: { className?: string; item: MenuItem }) {
   const pathName = usePathname();

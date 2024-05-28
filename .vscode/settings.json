@@ -3,5 +3,7 @@
   "editor.codeActionsOnSave": {
     "source.organizeImports": "never"
   },
-  "explorer.sortOrder": "type"
+  "explorer.sortOrder": "type",
+  "javascript.preferences.importModuleSpecifier": "non-relative",
+  "typescript.preferences.importModuleSpecifier": "non-relative"
 }

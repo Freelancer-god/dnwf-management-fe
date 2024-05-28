@@ -1,6 +1,5 @@
 "use client";
 
-import { ModalProvider } from "@/components/modal/provider";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Toaster } from "sonner";
 

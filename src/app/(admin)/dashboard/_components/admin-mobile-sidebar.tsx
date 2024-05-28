@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import SubnavDropdown from "@/components/subnav-dropdown";
-import { SIDEBAR_ITEMS } from "@/constants/constants";
+import { SIDEBAR_ITEMS } from "@/lib/constants";
 
 export default function AdminMobileSidebar() {
   return (

@@ -1,15 +1,16 @@
 import { DataTableDemo } from "@/components/generic-table";
 import { Button } from "@/components/ui/button";
+import { getUsers } from "@/services/user-service";
 
-export default function UsersPage() {
-  const users = [{}];
+export default async function UsersPage() {
+  const users = await getUsers();
 
   return (
     <>
       <div className="flex items-center">
         <h1 className="text-lg font-semibold md:text-2xl">Users</h1>
       </div>
-      {users.length > 0 ? <DataTableDemo /> : <EmptyUser />}
+      {users.length > 0 ? <DataTableDemo data={users} /> : <EmptyUser />}
     </>
   );
 }

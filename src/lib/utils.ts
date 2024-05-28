@@ -5,7 +5,7 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export async function fetcher<JSON = any>(input: RequestInfo, init?: RequestInit): Promise<JSON> {
+export async function fetcher<JSON>(input: RequestInfo, init?: RequestInit): Promise<JSON> {
   const response = await fetch(input, { ...init, cache: "no-store" });
 
   return response.json();
@@ -57,8 +57,3 @@ export const random = (min: number, max: number) => {
 export function capitalizeFirstLetter(words: string) {
   return words.charAt(0).toUpperCase() + words.slice(1);
 }
-
-export const getLastPathSegment = (path: string) => {
-  const segments = path.split("/").filter((segment) => segment);
-  return segments.length > 0 ? `/${segments[segments.length - 1]}` : "/";
-};

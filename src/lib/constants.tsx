@@ -1,4 +1,4 @@
-import { MenuItem } from "@/components/nav-item";
+import { MenuItem } from "@/types/menu-item";
 import { GroupIcon, Home, User } from "lucide-react";
 
 export const SIDEBAR_ITEMS: MenuItem[] = [
@@ -8,7 +8,7 @@ export const SIDEBAR_ITEMS: MenuItem[] = [
     icon: <Home className="h-4 w-4" />,
   },
   {
-    href: "/dashboard/users",
+    href: "#",
     label: "users",
     icon: <User className="h-4 w-4" />,
     subItems: [

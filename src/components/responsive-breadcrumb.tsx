@@ -29,7 +29,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { useMediaQuery } from "@/hooks/use-media-query";
+import { useMediaQuery } from "@/lib/hooks/use-media-query";
 import { usePathname } from "next/navigation";
 import { capitalizeFirstLetter } from "@/lib/utils";
 

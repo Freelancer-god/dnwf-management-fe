@@ -1,36 +1,29 @@
 "use client";
-import NavItem, { MenuItem } from "@/components/nav-item";
+import NavItem from "@/components/nav-item";
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { cn } from "@/lib/utils";
-import { ChevronDown } from "lucide-react";
-import { usePathname } from "next/navigation";
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import { MenuItem } from "@/types/menu-item";
 
 export default function SubnavDropdown({ item }: { item: MenuItem }) {
-  const pathName = usePathname();
+  const hasSubNav = item.subItems && item.subItems.length > 0;
 
-  return item.subItems && item.subItems.length > 0 ? (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <div
-          className={cn("flex items-center justify-between", pathName === item.href && "bg-muted")}
-        >
+  return hasSubNav ? (
+    <Accordion type="single" collapsible className="w-full !border-b-0">
+      <AccordionItem value="item-1">
+        <AccordionTrigger className="py-2">
           <NavItem item={item} />
-          <ChevronDown className="mr-3 h-4 w-4" />
-        </div>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent>
-        {item.subItems?.map((subitem: MenuItem) => (
-          <DropdownMenuItem key={item.href} asChild>
-            <NavItem item={subitem} />
-          </DropdownMenuItem>
-        ))}
-      </DropdownMenuContent>
-    </DropdownMenu>
+        </AccordionTrigger>
+        <AccordionContent className="ml-2">
+          {item.subItems?.map((subitem: MenuItem) => (
+            <SubnavDropdown key={subitem.href} item={subitem} />
+          ))}
+        </AccordionContent>
+      </AccordionItem>
+    </Accordion>
   ) : (
     <NavItem item={item} />
   );

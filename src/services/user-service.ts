@@ -1,4 +1,4 @@
-import { fetcher } from "@/lib/utils";
+import { fetcher, wait } from "@/lib/utils";
 import { User } from "@/types/user";
 
 const BASE_URL = process.env.NEXT_BE_URL;

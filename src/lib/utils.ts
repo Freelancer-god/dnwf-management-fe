@@ -57,3 +57,16 @@ export const random = (min: number, max: number) => {
 export function capitalizeFirstLetter(words: string) {
   return words.charAt(0).toUpperCase() + words.slice(1);
 }
+
+export function wait<T>(callback: () => T | Promise<T>, timeout = 3000): Promise<T> {
+  return new Promise((resolve, reject) => {
+    setTimeout(async () => {
+      try {
+        const result = await callback();
+        resolve(result);
+      } catch (error) {
+        reject(error);
+      }
+    }, timeout);
+  });
+}

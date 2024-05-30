@@ -1,6 +1,6 @@
-import AdminHeader from "@/app/(admin)/dashboard/_components/admin-header";
-import AdminMobileSidebar from "@/app/(admin)/dashboard/_components/admin-mobile-sidebar";
-import AdminSidebar from "@/app/(admin)/dashboard/_components/admin-sidebar";
+import AdminHeader from "@/app/dashboard/_components/admin-header";
+import AdminMobileSidebar from "@/app/dashboard/_components/admin-mobile-sidebar";
+import AdminSidebar from "@/app/dashboard/_components/admin-sidebar";
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   return (

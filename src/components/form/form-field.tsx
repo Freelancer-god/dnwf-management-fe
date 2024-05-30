@@ -12,29 +12,29 @@ import {
 export function FormField({ name, schema }: { name: string; schema: ZodTypeAny }) {
   if (schema instanceof z.ZodString) {
     return (
-      <div className="flex flex-col space-y-1.5 uppercase">
+      <div className="flex flex-col space-y-1.5 capitalize">
         <Label htmlFor={name}>{name}</Label>
-        <Input name={name} id={name} placeholder={`Enter ${name}`} />
+        <Input name={name} id={name} />
       </div>
     );
   }
 
   if (schema instanceof z.ZodNumber) {
     return (
-      <div className="flex flex-col space-y-1.5 uppercase">
+      <div className="flex flex-col space-y-1.5 capitalize">
         <Label htmlFor={name}>{name}</Label>
-        <Input name={name} id={name} type="number" placeholder={`Enter ${name}`} />
+        <Input name={name} id={name} type="number" />
       </div>
     );
   }
 
   if (schema instanceof z.ZodEnum) {
     return (
-      <div className="flex flex-col space-y-1.5 uppercase">
+      <div className="flex flex-col space-y-1.5 capitalize">
         <Label htmlFor={name}>{name}</Label>
         <Select name={name}>
           <SelectTrigger id={name}>
-            <SelectValue placeholder={`Select ${name}`} />
+            <SelectValue />
           </SelectTrigger>
           <SelectContent>
             {schema.options.map((option: string) => (

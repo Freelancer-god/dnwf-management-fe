@@ -35,7 +35,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { getUsers } from "@/services/user-service";
 import { User } from "@/types/user";
 
 const data: Payment[] = [
@@ -166,9 +165,16 @@ export const columns: ColumnDef<User>[] = [
 
 export function DataTableDemo({ data }) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
+  // const { sorting, setSorting, field, order } = useSorting();
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
   const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = React.useState({});
+
+  // K pass data tu ngoai vao nua~ ma call api lay data o day
+  // const [data, count, loading] = useFakeAPI("/episodes", {
+  //   pagination: { skip, limit },
+  //   sort: { field, order },
+  // );
 
   const table = useReactTable({
     data,
@@ -177,7 +183,7 @@ export function DataTableDemo({ data }) {
     onColumnFiltersChange: setColumnFilters,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
-    getSortedRowModel: getSortedRowModel(),
+    // getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     onColumnVisibilityChange: setColumnVisibility,
     onRowSelectionChange: setRowSelection,
@@ -187,6 +193,7 @@ export function DataTableDemo({ data }) {
       columnVisibility,
       rowSelection,
     },
+    manualSorting: true,
   });
 
   return (

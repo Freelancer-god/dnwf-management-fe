@@ -1,6 +1,5 @@
 import { z, ZodTypeAny } from "zod";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import {
   Select,
   SelectContent,
@@ -8,31 +7,26 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { Control } from "react-hook-form";
 
-export function FormField({ name, schema }: { name: string; schema: ZodTypeAny }) {
-  if (schema instanceof z.ZodString) {
-    return (
-      <div className="flex flex-col space-y-1.5 capitalize">
-        <Label htmlFor={name}>{name}</Label>
-        <Input name={name} id={name} />
-      </div>
-    );
-  }
-
-  if (schema instanceof z.ZodNumber) {
-    return (
-      <div className="flex flex-col space-y-1.5 capitalize">
-        <Label htmlFor={name}>{name}</Label>
-        <Input name={name} id={name} type="number" />
-      </div>
-    );
-  }
-
-  if (schema instanceof z.ZodEnum) {
-    return (
-      <div className="flex flex-col space-y-1.5 capitalize">
-        <Label htmlFor={name}>{name}</Label>
-        <Select name={name}>
+export function GenericFormField({
+  name,
+  schema,
+  control,
+}: {
+  name: string;
+  schema: ZodTypeAny;
+  control: Control<any>;
+}) {
+  const getFieldComponent = (props) => {
+    if (schema instanceof z.ZodString)
+      return <Input name={name} id={name} type="text" {...props} />;
+    if (schema instanceof z.ZodNumber)
+      return <Input name={name} id={name} type="number" {...props} />;
+    if (schema instanceof z.ZodEnum) {
+      return (
+        <Select name={name} {...props}>
           <SelectTrigger id={name}>
             <SelectValue />
           </SelectTrigger>
@@ -44,9 +38,22 @@ export function FormField({ name, schema }: { name: string; schema: ZodTypeAny }
             ))}
           </SelectContent>
         </Select>
-      </div>
-    );
-  }
-  // Handle other types if necessary
-  return null;
+      );
+    }
+    return <Input name={name} id={name} type="text" />; // Default to text input
+  };
+
+  return (
+    <FormField
+      control={control}
+      name={name}
+      render={({ field }) => (
+        <FormItem>
+          <FormLabel className="capitalize">{name}</FormLabel>
+          <FormControl>{getFieldComponent(field)}</FormControl>
+          <FormMessage />
+        </FormItem>
+      )}
+    />
+  );
 }

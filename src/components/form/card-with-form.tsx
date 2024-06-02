@@ -11,7 +11,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { useModal } from "@/components/modal/provider";
-import { FormField } from "@/components/form/form-field";
+import { GenericFormField } from "@/components/form/form-field";
 import { ZodObject, ZodTypeAny } from "zod";
 
 type FormActionType = string | ((formData: FormData) => Promise<any>);
@@ -29,7 +29,7 @@ export default function CardWithForm({
 
   const renderFormFields = (schema: ZodObject<any>) => {
     return Object.entries(schema.shape).map(([key, value]) => (
-      <FormField key={key} name={key} schema={value as ZodTypeAny} />
+      <GenericFormField key={key} name={key} schema={value as ZodTypeAny} />
     ));
   };
 

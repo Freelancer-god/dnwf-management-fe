@@ -1,17 +1,6 @@
-import { CircleUser, Search } from "lucide-react";
-
-import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Input } from "@/components/ui/input";
-import { ReactNode } from "react";
+import { ReactNode, Suspense } from "react";
 import { BreadcrumbResponsive } from "@/components/responsive-breadcrumb";
+import UserProfileHeader from "@/app/dashboard/_components/user-profile-header";
 
 export default function AdminHeader({ MobileSideBar }: { MobileSideBar: ReactNode }) {
   return (
@@ -20,22 +9,9 @@ export default function AdminHeader({ MobileSideBar }: { MobileSideBar: ReactNod
       <div className="w-full flex-1">
         <BreadcrumbResponsive />
       </div>
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <Button variant="secondary" size="icon" className="rounded-full">
-            <CircleUser className="h-5 w-5" />
-            <span className="sr-only">Toggle user menu</span>
-          </Button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent align="end">
-          <DropdownMenuLabel>My Account</DropdownMenuLabel>
-          <DropdownMenuSeparator />
-          <DropdownMenuItem>Settings</DropdownMenuItem>
-          <DropdownMenuItem>Support</DropdownMenuItem>
-          <DropdownMenuSeparator />
-          <DropdownMenuItem>Logout</DropdownMenuItem>
-        </DropdownMenuContent>
-      </DropdownMenu>
+      <Suspense fallback={<div>Loading...</div>}>
+        <UserProfileHeader />
+      </Suspense>
     </header>
   );
 }

@@ -6,9 +6,14 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export async function fetcher<JSON>(input: RequestInfo, init?: RequestInit): Promise<JSON> {
-  const response = await fetch(input, { ...init, cache: "no-store" });
+  try {
+    const response = await fetch(input, { ...init, cache: "no-store" });
 
-  return response.json();
+    return response.json();
+  } catch (error) {
+    console.log("🚀 ~ error:", error)
+    return null;
+  }
 }
 
 export const capitalize = (s: string) => {

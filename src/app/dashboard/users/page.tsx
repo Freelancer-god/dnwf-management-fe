@@ -1,10 +1,10 @@
 import CreateUserForm from "@/app/dashboard/users/_components/create-user-form";
 import CreateButton from "@/components/create-button";
 import { DataTableDemo } from "@/components/generic-table";
-import { getUsers } from "@/services/user-service";
+import { fetchUsers } from "@/services/user-service";
 
 export default async function UsersPage() {
-  const users = await getUsers();
+  const users = await fetchUsers();
 
   return (
     <>
@@ -14,7 +14,7 @@ export default async function UsersPage() {
           <CreateUserForm />
         </CreateButton>
       </div>
-      <DataTableDemo data={users} />
+      {/* <DataTableDemo data={users} /> */}
     </>
   );
 }

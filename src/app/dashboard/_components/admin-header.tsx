@@ -1,5 +1,3 @@
-"use client";
-
 import { ReactNode, Suspense } from "react";
 import { BreadcrumbResponsive } from "@/components/responsive-breadcrumb";
 import UserProfileHeader from "@/app/dashboard/_components/user-profile-header";

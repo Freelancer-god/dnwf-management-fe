@@ -1,4 +1,3 @@
-"use client";
 import { Bell, Package2 } from "lucide-react";
 import Link from "next/link";
 

@@ -1,7 +1,6 @@
 "use client";
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { UserProfileRequest, UserProfileRequestSchema } from "@/types/user-profile";
@@ -10,10 +9,14 @@ import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/comp
 import { Input } from "@/components/ui/input";
 import { signIn } from "next-auth/react";
 import { toast } from "sonner";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
+import { LoadingButton } from "@/components/ui/button-with-loading";
 
 export default function LoginForm() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const callbackUrl = searchParams?.get("callbackUrl");
+  const redirectUrl = callbackUrl || "/dashboard";
 
   // 1. Define your form.
   const form = useForm<UserProfileRequest>({
@@ -38,7 +41,8 @@ export default function LoginForm() {
       return toast.error(result?.error);
     }
 
-    return router.push(`/dashboard`);
+    toast.success("Đăng nhập thành công");
+    return router.push(redirectUrl);
   }
 
   return (
@@ -78,9 +82,9 @@ export default function LoginForm() {
                 )}
               />
 
-              <Button type="submit" className="w-full">
+              <LoadingButton type="submit" className="w-full" loading={form.formState.isSubmitting}>
                 Đăng nhập
-              </Button>
+              </LoadingButton>
             </div>
           </form>
         </Form>

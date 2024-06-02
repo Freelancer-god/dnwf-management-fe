@@ -1,5 +1,5 @@
 import { login } from "@/services/auth-service";
-import NextAuth from "next-auth";
+import NextAuth, { AuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 
 export const authOptions = {
@@ -39,22 +39,19 @@ export const authOptions = {
     }),
   ],
   pages: {
-    signIn: "/auth/signin",
-    // signOut: '/auth/signout',
-    // error: '/auth/error', // Error code passed in query string as ?error=
-    // verifyRequest: '/auth/verify-request', // (used for check email message)
-    // newUser: '/auth/new-user' // New users will be directed here on first sign in (leave the property out if not of interest)
+    signIn: "/login",
   },
   callbacks: {
     async jwt({ token, user }) {
       return { ...token, ...user };
     },
     async session({ session, token, user }) {
-      session.accessToken = token?.token
-      session.user = token?.data
+      session.accessToken = token?.token as any;
+      session.user = token?.data as any;
       return session;
     },
   },
+  secret: process.env.NEXTAUTH_SECRET,
 };
 
 export default NextAuth(authOptions);

@@ -3,24 +3,18 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { UserProfileRequest, UserProfileRequestSchema } from "@/types/user-profile";
+import { LoginSchema, LoginType } from "@/types/user-profile";
 import { Form } from "@/components/ui/form";
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { signIn } from "next-auth/react";
-import { toast } from "sonner";
-import { useRouter, useSearchParams } from "next/navigation";
 import { LoadingButton } from "@/components/ui/button-with-loading";
+import { login } from "@/actions/auth-action";
+import { toast } from "sonner";
 
 export default function LoginForm() {
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const callbackUrl = searchParams?.get("callbackUrl");
-  const redirectUrl = callbackUrl || "/dashboard";
-
   // 1. Define your form.
-  const form = useForm<UserProfileRequest>({
-    resolver: zodResolver(UserProfileRequestSchema),
+  const form = useForm<LoginType>({
+    resolver: zodResolver(LoginSchema),
     defaultValues: {
       username: "",
       password: "",
@@ -28,21 +22,15 @@ export default function LoginForm() {
   });
 
   // 2. Define a submit handler.
-  async function onSubmit(values: UserProfileRequest) {
+  async function onSubmit(values: LoginType) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
-    const result = await signIn("credentials", {
-      username: values.username,
-      password: values.password,
-      redirect: false,
-    });
-
-    if (!result?.ok) {
-      return toast.error(result?.error);
+    const result = await login(values);
+    if (result?.error) {
+      toast.error(result?.error);
+    } else {
+      toast.success("Đăng nhập thành công");
     }
-
-    toast.success("Đăng nhập thành công");
-    return router.push(redirectUrl);
   }
 
   return (

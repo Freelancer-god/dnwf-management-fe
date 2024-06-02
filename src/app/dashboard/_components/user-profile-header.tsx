@@ -1,5 +1,4 @@
-"use client";
-import { CircleUser, Search } from "lucide-react";
+import { CircleUser } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -10,10 +9,11 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { signOut, useSession } from "next-auth/react";
+import { auth } from "@/auth";
+import { signOutAction } from "@/actions/auth-action";
 
-export default function UserProfileHeader() {
-  const { data: session } = useSession();
+export default async function UserProfileHeader() {
+  const session = await auth();
 
   return (
     <DropdownMenu>
@@ -24,13 +24,17 @@ export default function UserProfileHeader() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuLabel>{session?.user.name}</DropdownMenuLabel>
+        <DropdownMenuLabel>{session?.user?.name}</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem>Settings</DropdownMenuItem>
         <DropdownMenuItem>Support</DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuItem onClick={() => signOut({ callbackUrl: "/login" })}>
-          Logout
+        <DropdownMenuItem asChild>
+          <form action={signOutAction}>
+            <button className="w-full text-left" type="submit">
+              Sign Out
+            </button>
+          </form>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

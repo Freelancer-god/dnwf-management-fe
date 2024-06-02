@@ -42,9 +42,9 @@ export type UserProfileResponse = {
   error?: string;
 };
 
-export const UserProfileRequestSchema = z.object({
+export const LoginSchema = z.object({
   username: z.string().trim().min(1, "Username cần ít nhất 1 ký tự"),
   password: z.string().trim().min(1, "Password cần ít nhất 1 ký tự"),
 });
 
-export type UserProfileRequest = z.infer<typeof UserProfileRequestSchema>;
+export type LoginType = z.infer<typeof LoginSchema>;

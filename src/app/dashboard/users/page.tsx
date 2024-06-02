@@ -14,7 +14,7 @@ export default async function UsersPage() {
           <CreateUserForm />
         </CreateButton>
       </div>
-      <DataTableDemo data={users} />
+      {/* <DataTableDemo data={users} /> */}
     </>
   );
 }

@@ -26,7 +26,7 @@ export function GenericFormField({
       return <Input name={name} id={name} type="number" {...props} />;
     if (schema instanceof z.ZodEnum) {
       return (
-        <Select name={name} {...props}>
+        <Select name={name} onValueChange={props.onChange} defaultValue={props.value} {...props}>
           <SelectTrigger id={name}>
             <SelectValue />
           </SelectTrigger>

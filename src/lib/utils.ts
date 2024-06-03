@@ -11,8 +11,8 @@ export async function fetcher<JSON>(input: RequestInfo, init?: RequestInit): Pro
 
     return response.json();
   } catch (error) {
-    console.log("🚀 ~ error:", error)
-    return null;
+    console.log("🚀 ~ error:", error);
+    throw error;
   }
 }
 

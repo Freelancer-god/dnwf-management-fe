@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { auth } from "@/auth";
 import { signOutAction } from "@/actions/auth-action";
+import SubmitButton from "@/components/form/button/submit-button";
 
 export default async function UserProfileHeader() {
   const session = await auth();
@@ -31,9 +32,7 @@ export default async function UserProfileHeader() {
         <DropdownMenuSeparator />
         <DropdownMenuItem asChild>
           <form action={signOutAction}>
-            <button className="w-full text-left" type="submit">
-              Sign Out
-            </button>
+            <SubmitButton label="Sign out" />
           </form>
         </DropdownMenuItem>
       </DropdownMenuContent>

@@ -4,7 +4,6 @@ import { AuthError } from "next-auth";
 import { LoginSchema, LoginType } from "@/types/user-profile";
 import { signIn, signOut } from "@/auth";
 import { DEFAULT_LOGIN_REDIRECT, SIGN_IN_ROUTE } from "@/routes";
-import { toast } from "sonner";
 
 export async function login(values: LoginType) {
   const validatedFields = LoginSchema.safeParse(values); // Validate using Zod

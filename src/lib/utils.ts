@@ -9,6 +9,13 @@ export async function fetcher<JSON>(input: RequestInfo, init?: RequestInit): Pro
   try {
     const response = await fetch(input, { ...init, cache: "no-store" });
 
+    if (!response.ok) {
+      const errorDetails = await response.json();
+      throw new Error(
+        `Error: ${response.status} - ${response.statusText} - ${JSON.stringify(errorDetails)}`,
+      );
+    }
+
     return response.json();
   } catch (error) {
     console.log("🚀 ~ error:", error);

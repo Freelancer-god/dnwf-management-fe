@@ -22,6 +22,7 @@ module.exports = {
     "plugin:react/recommended",
     "plugin:prettier/recommended",
     "plugin:react-hooks/recommended",
+    "plugin:@tanstack/eslint-plugin-query/recommended",
   ],
   plugins: ["prettier", "@typescript-eslint", "react", "react-hooks"],
   rules: {
@@ -60,6 +61,10 @@ module.exports = {
     "react/react-in-jsx-scope": "off",
     "react/prop-types": "off",
     "prettier/prettier": "warn",
+    // TanStack query
+    "@tanstack/query/exhaustive-deps": "error",
+    "@tanstack/query/no-rest-destructuring": "warn",
+    "@tanstack/query/stable-query-client": "error",
   },
   settings: {
     react: {

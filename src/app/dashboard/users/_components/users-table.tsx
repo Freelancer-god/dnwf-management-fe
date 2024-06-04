@@ -11,15 +11,18 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { DataTablePagination } from "@/components/table/data-table-pagination";
+import { useGetUsers } from "@/services/user-service";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
-  data: TData[];
+  initialData: TData[];
 }
 
-export function UsersTable<TData, TValue>({ columns, data }: DataTableProps<TData, TValue>) {
+export function UsersTable<TData, TValue>({ columns, initialData }: DataTableProps<TData, TValue>) {
+  const { data, isLoading: isUserLoading, isError: isUserError } = useGetUsers(initialData);
+
   const table = useReactTable({
-    data,
+    data: data as any,
     columns,
     getCoreRowModel: getCoreRowModel(),
   });

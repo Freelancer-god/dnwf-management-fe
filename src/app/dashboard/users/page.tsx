@@ -6,7 +6,7 @@ import { fetchUsers } from "@/services/user-service";
 
 export default async function UsersPage() {
   // const users = await fetchUsers();
-  const users = await fetchUsers();
+  const users = await fetchUsers({ page: 1, limit: 10 });
 
   return (
     <>

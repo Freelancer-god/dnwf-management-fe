@@ -1,7 +1,7 @@
 import axios, { AxiosRequestConfig } from "axios";
 
 const apiClient = axios.create({
-  baseURL: process.env.NEXT_MOCK_API_URL || process.env.NEXT_BE_URL,
+  baseURL: process.env.NEXT_PUBLIC_MOCK_API_URL || process.env.NEXT_PUBLIC_BE_URL,
 });
 
 // apiClient.interceptors.request.use(

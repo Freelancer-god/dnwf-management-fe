@@ -1,5 +1,5 @@
 import { columns } from "@/app/dashboard/users/_components/columns";
-import CreateUserForm from "@/app/dashboard/users/_components/create-user-form";
+import UserForm from "@/app/dashboard/users/_components/user-form";
 import { UsersTable } from "@/app/dashboard/users/_components/users-table";
 import CreateButton from "@/components/create-button";
 import { fetchUsers } from "@/services/user-service";
@@ -13,7 +13,7 @@ export default async function UsersPage() {
       <div className="flex items-center justify-between">
         <h1 className="text-lg font-semibold md:text-2xl">Users</h1>
         <CreateButton label="Create New User">
-          <CreateUserForm />
+          <UserForm type="Create" />
         </CreateButton>
       </div>
       <UsersTable columns={columns} initialData={users} />

@@ -32,16 +32,6 @@ export const UserProfileSchema = z
 
 export type UserProfile = z.infer<typeof UserProfileSchema>;
 
-export type UserProfileResponse = {
-  success: string;
-  data?: {
-    data?: UserProfile;
-    token: string;
-  };
-  message?: string;
-  error?: string;
-};
-
 export const LoginSchema = z.object({
   username: z.string().trim().min(1, "Username cần ít nhất 1 ký tự"),
   password: z.string().trim().min(1, "Password cần ít nhất 1 ký tự"),

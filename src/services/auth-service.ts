@@ -1,19 +1,16 @@
-import { fetcher } from "@/lib/utils";
-import { UserProfileResponse } from "@/types/user-profile";
-
-const BASE_URL = process.env.NEXT_BE_URL + "/api/v1";
+import { UserProfile } from "@/types/user-profile";
+import { fetcher } from "@/lib/axios";
 
 export const login = async ({ username, password }) => {
-  const response = fetcher<UserProfileResponse>(`${BASE_URL}/login`, {
+  return await fetcher<{
+    data: UserProfile;
+    token: string;
+  }>({
+    url: `/api/v1/login`,
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
+    data: {
       username,
       password,
-    }),
+    },
   });
-
-  return response;
 };

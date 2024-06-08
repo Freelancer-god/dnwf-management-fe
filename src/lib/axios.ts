@@ -1,6 +1,5 @@
 import { errorHandler } from "@/lib/error-handler";
-import axios, { AxiosError, AxiosRequestConfig } from "axios";
-import Cookies from "js-cookie";
+import axios, { AxiosRequestConfig } from "axios";
 
 export type ApiResponse<Data> = {
   data: Data;
@@ -10,23 +9,8 @@ export type ApiResponse<Data> = {
 };
 
 const apiClient = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_BE_URL,
+  baseURL: process.env.NEXT_PUBLIC_BE_URL || process.env.NEXT_PUBLIC_MOCK_API_URL,
 });
-
-apiClient.interceptors.request.use(
-  (config) => {
-    // Bearer needed for the backend
-    const token = Cookies().get("next-auth.session-token");
-    console.log("🚀 ~ token:", token);
-    if (token) {
-      config.headers["Authorization"] = "Bearer " + token;
-    }
-    return config;
-  },
-  (error) => {
-    return Promise.reject(error);
-  },
-);
 
 /**
  * Usage: fetcher<User[]>({ url: "/users", method: "GET" });
@@ -36,24 +20,17 @@ export const fetcher = async <T>(config: AxiosRequestConfig): Promise<ApiRespons
   return response.data as ApiResponse<T>;
 };
 
+export const setAuthToken = (token): void => {
+  if (token) {
+    apiClient.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  } else {
+    delete apiClient.defaults.headers.common["Authorization"];
+  }
+};
+
 const apiClientForMockApi = axios.create({
   baseURL: process.env.NEXT_PUBLIC_MOCK_API_URL,
 });
-
-apiClientForMockApi.interceptors.request.use(
-  (config) => {
-    // Bearer needed for the backend
-    const token = Cookies.get("next-auth.session-token");
-    console.log("🚀 ~ token:", token);
-    if (token) {
-      config.headers["Authorization"] = "Bearer " + token;
-    }
-    return config;
-  },
-  (error) => {
-    return Promise.reject(error);
-  },
-);
 
 export const fetcherForMockApi = async <T>(config: AxiosRequestConfig): Promise<T> => {
   try {

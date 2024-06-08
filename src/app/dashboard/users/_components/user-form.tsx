@@ -6,15 +6,9 @@ import ModalCard from "@/components/form/modal-card";
 import ReactHookForm from "@/components/form/react-hook-form";
 import { useCreateUser, useEditUser } from "@/services/user-service";
 
-export default function UserForm({
-  type,
-  initialData = {},
-}: {
-  type: "Create" | "Edit";
-  initialData?: any;
-}) {
-  const { mutate: mutateCreate, isPending: isPendingCreate } = useCreateUser();
-  const { mutate: mutateEdit, isPending: isPendingEdit } = useEditUser();
+export default function UserForm({ type, initialData = {} }: { type: "Create" | "Edit"; initialData?: any }) {
+  const { mutate: mutateCreate, isPending: isPendingCreate, isSuccess: isSuccessCreate } = useCreateUser();
+  const { mutate: mutateEdit, isPending: isPendingEdit, isSuccess: isSuccessEdit } = useEditUser();
 
   const form = useForm<User>({
     resolver: zodResolver(userSchema),
@@ -35,6 +29,7 @@ export default function UserForm({
         buttonLabel: type,
       }}
       isLoading={isPendingCreate || isPendingEdit}
+      onClose={isSuccessCreate || isSuccessEdit}
     >
       <ReactHookForm
         formId={`${type}-user-form`}

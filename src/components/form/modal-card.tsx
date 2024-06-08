@@ -39,11 +39,11 @@ export default function ModalCard({
 
   // Hide modal after submitted
   React.useEffect(() => {
-    if (form?.formState.isSubmitSuccessful || onClose) {
+    if (onClose) {
       return modal?.hide();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [form?.formState.isSubmitSuccessful, onClose]);
+  }, [onClose]);
 
   return (
     <Card className="min-w-[350px]">

@@ -1,13 +1,6 @@
 import { ColumnDef, flexRender, getCoreRowModel, useReactTable } from "@tanstack/react-table";
 
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { DataTablePagination } from "@/components/table/data-table-pagination";
 import {
   DropdownMenu,
@@ -26,11 +19,7 @@ type DataTableProps<TData, TValue> = {
   isLoading: boolean;
 };
 
-export default function DataTable<TData, TValue>({
-  table,
-  columns,
-  isLoading,
-}: DataTableProps<TData, TValue>) {
+export default function DataTable<TData, TValue>({ table, columns, isLoading }: DataTableProps<TData, TValue>) {
   return (
     <div className="w-full">
       <div className="flex items-center py-4">
@@ -73,9 +62,7 @@ export default function DataTable<TData, TValue>({
                 {headerGroup.headers.map((header) => {
                   return (
                     <TableHead key={header.id}>
-                      {header.isPlaceholder
-                        ? null
-                        : flexRender(header.column.columnDef.header, header.getContext())}
+                      {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
                     </TableHead>
                   );
                 })}
@@ -88,9 +75,7 @@ export default function DataTable<TData, TValue>({
               table.getRowModel().rows.map((row) => (
                 <TableRow key={row.id} data-state={row.getIsSelected() && "selected"}>
                   {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
-                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                    </TableCell>
+                    <TableCell key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</TableCell>
                   ))}
                 </TableRow>
               ))

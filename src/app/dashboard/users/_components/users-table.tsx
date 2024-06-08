@@ -5,10 +5,11 @@ import { ColumnDef, getCoreRowModel, useReactTable } from "@tanstack/react-table
 import { useGetUsers } from "@/services/user-service";
 import usePagination from "@/lib/hooks/use-pagination";
 import DataTable from "@/components/table/data-table";
+import { User } from "@/types/user";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
-  initialData: TData[];
+  initialData: User[];
 }
 
 export function UsersTable<TData, TValue>({ columns, initialData }: DataTableProps<TData, TValue>) {

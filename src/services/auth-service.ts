@@ -6,7 +6,7 @@ export const login = async ({ username, password }) => {
     data: UserProfile;
     token: string;
   }>({
-    url: `/api/v1/login`,
+    url: `/login`,
     method: "POST",
     data: {
       username,

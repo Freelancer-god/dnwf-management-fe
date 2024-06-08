@@ -2,16 +2,12 @@
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { useEffect } from "react";
+import { toast } from "sonner";
 
-export default function Error({
-  error,
-  reset,
-}: {
-  error: Error & { digest?: string };
-  reset: () => void;
-}) {
+export default function Error({ error, reset }: { error: Error & { digest?: string }; reset: () => void }) {
   useEffect(() => {
-    console.error(error);
+    if (error.message) toast.error(error.message);
+    console.error(error.message);
   }, [error]);
 
   return (
@@ -24,8 +20,8 @@ export default function Error({
           Đã xảy ra lỗi
         </h1>
         <p className="mb-5 text-base font-normal text-gray-500 dark:text-gray-400 md:text-lg">
-          Ôi! Có vẻ như bạn đã nhấp vào một liên kết không đúng. Nếu bạn nghĩ rằng đây là vấn đề của
-          chúng tôi, vui lòng cho chúng tôi biết
+          Ôi! Có vẻ như bạn đã nhấp vào một liên kết không đúng. Nếu bạn nghĩ rằng đây là vấn đề của chúng tôi, vui lòng
+          cho chúng tôi biết
         </p>
         <Button onClick={reset}>
           <svg

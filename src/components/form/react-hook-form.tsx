@@ -11,13 +11,7 @@ type ReactHookFormProps = {
   children?: ReactNode;
 };
 
-export default function ReactHookForm({
-  form,
-  formId,
-  onSubmit,
-  schema,
-  children,
-}: ReactHookFormProps) {
+export default function ReactHookForm({ form, formId, onSubmit, schema, children }: ReactHookFormProps) {
   return (
     <Form {...form}>
       <form id={formId} onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">

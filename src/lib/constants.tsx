@@ -24,4 +24,9 @@ export const SIDEBAR_ITEMS: MenuItem[] = [
       },
     ],
   },
+  {
+    href: "/dashboard/employees",
+    label: "Employee",
+    icon: <User className="h-4 w-4" />,
+  },
 ];

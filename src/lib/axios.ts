@@ -2,29 +2,37 @@ import { errorHandler } from "@/lib/error-handler";
 import axios, { AxiosRequestConfig } from "axios";
 
 export type ApiResponse<Data> = {
-  data: Data;
+  data: {
+    data: Data;
+    total: number;
+  };
   success?: string;
   message?: string;
   error?: string;
 };
 
 const apiClient = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_BE_URL || process.env.NEXT_PUBLIC_MOCK_API_URL,
+  baseURL: `${process.env.NEXT_PUBLIC_BE_URL}/api/v1/`,
 });
-
-/**
- * Usage: fetcher<User[]>({ url: "/users", method: "GET" });
- */
-export const fetcher = async <T>(config: AxiosRequestConfig): Promise<ApiResponse<T>> => {
-  const response = await apiClient.request<T>(config);
-  return response.data as ApiResponse<T>;
-};
 
 export const setAuthToken = (token): void => {
   if (token) {
     apiClient.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   } else {
     delete apiClient.defaults.headers.common["Authorization"];
+  }
+};
+
+/**
+ * Usage: fetcher<User[]>({ url: "/users", method: "GET" });
+ */
+export const fetcher = async <T>(config: AxiosRequestConfig): Promise<ApiResponse<T>> => {
+  try {
+    const response = await apiClient.request<T>(config);
+    return response.data as ApiResponse<T>;
+  } catch (error) {
+    const { message: errorMessage } = errorHandler(error);
+    throw new Error(errorMessage);
   }
 };
 

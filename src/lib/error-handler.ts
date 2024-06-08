@@ -2,11 +2,11 @@ export const errorHandler = (error) => {
   if (error.response) {
     // The request was made and the server responded with a status code
     // that falls out of the range of 2xx
-    console.log(error.response.data);
+    console.log("error.response.data", error.response.data);
     console.log(error.response.status);
 
     return {
-      message: error.response.data?.message || error.response.data,
+      message: error.response.data?.message || error.response.data?.error || error.response.data,
       status: error.response.status,
     };
   } else if (error.request) {

@@ -44,6 +44,14 @@ export const fetcher = async <T>(config: AxiosRequestConfig): Promise<ApiRespons
   }
 };
 
+export const fetcherLogin = async <T>(config: AxiosRequestConfig): Promise<ApiResponse<T>> => {
+  const apiClient2 = axios.create({
+    baseURL: `${process.env.NEXT_PUBLIC_BE_URL}/api/v1/`,
+  });
+  const response = await apiClient2.request<T>(config);
+  return response.data as ApiResponse<T>;
+};
+
 const apiClientForMockApi = axios.create({
   baseURL: process.env.NEXT_PUBLIC_MOCK_API_URL,
 });

@@ -11,9 +11,7 @@ export async function fetcher<JSON>(input: RequestInfo, init?: RequestInit): Pro
 
     if (!response.ok) {
       const errorDetails = await response.json();
-      throw new Error(
-        `Error: ${response.status} - ${response.statusText} - ${JSON.stringify(errorDetails)}`,
-      );
+      throw new Error(`Error: ${response.status} - ${response.statusText} - ${JSON.stringify(errorDetails)}`);
     }
 
     return response.json();
@@ -81,4 +79,21 @@ export function wait<T>(callback: () => T | Promise<T>, timeout = 3000): Promise
       }
     }, timeout);
   });
+}
+
+export function mergeArraysById(first, updates) {
+  const result = [...first];
+
+  updates.forEach((update) => {
+    const index = result.findIndex((item) => item.id === update.id);
+    if (index !== -1) {
+      // Override existing object
+      result[index] = update;
+    } else {
+      // Add new object
+      result.push(update);
+    }
+  });
+
+  return result;
 }

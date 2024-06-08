@@ -1,29 +1,28 @@
 import { z, ZodTypeAny } from "zod";
 import { Input } from "@/components/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Control } from "react-hook-form";
+import React from "react";
 
 export function GenericFormField({
   name,
   schema,
   control,
+  overrideComponent,
 }: {
   name: string;
   schema: ZodTypeAny;
   control: Control<any>;
+  overrideComponent?: JSX.Element;
 }) {
   const getFieldComponent = (props) => {
-    if (schema instanceof z.ZodString)
-      return <Input name={name} id={name} type="text" {...props} />;
-    if (schema instanceof z.ZodNumber)
-      return <Input name={name} id={name} type="number" {...props} />;
+    if (overrideComponent) {
+      return React.cloneElement(overrideComponent, props);
+    }
+
+    if (schema instanceof z.ZodString) return <Input name={name} id={name} type="text" {...props} />;
+    if (schema instanceof z.ZodNumber) return <Input name={name} id={name} type="number" {...props} />;
     if (schema instanceof z.ZodEnum) {
       return (
         <Select name={name} onValueChange={props.onChange} defaultValue={props.value} {...props}>
@@ -40,7 +39,7 @@ export function GenericFormField({
         </Select>
       );
     }
-    return <Input name={name} id={name} type="text" />; // Default to text input
+    return <Input name={name} id={name} type="text" {...props} />; // Default to text input
   };
 
   return (

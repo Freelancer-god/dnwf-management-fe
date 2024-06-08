@@ -15,17 +15,19 @@ import { DataTableColumnHeader } from "@/components/table/data-table-column-head
 import { Employee, employeeSchema } from "@/types/employee";
 import { Checkbox } from "@/components/ui/checkbox";
 import { ZodObject } from "zod";
-import { capitalize } from "@/lib/utils";
+import { capitalize, mergeArraysById } from "@/lib/utils";
 import DeleteEmployeeForm from "@/app/dashboard/employees/_components/delete-employee-form";
 import DropDownModalWrapper from "@/components/dropdown/dropdown-modal-wrapper";
 import EmployeeForm from "@/app/dashboard/employees/_components/employee-form";
+import { READ_FIELDS_EXCLUDE } from "@/lib/constants";
 
 function dynamicColumns(schema: ZodObject<any>) {
   return Object.entries(schema.shape)
     .map(([key, value]) => {
-      if (key === "id") return null;
+      if (READ_FIELDS_EXCLUDE.includes(key)) return null;
 
       return {
+        id: key,
         accessorKey: key,
         header: ({ column }) => <DataTableColumnHeader column={column} title={capitalize(key)} />,
       };
@@ -33,7 +35,7 @@ function dynamicColumns(schema: ZodObject<any>) {
     .filter((column) => column !== null) as ColumnDef<Employee>[];
 }
 
-export const columns: ColumnDef<Employee>[] = [
+const defaultColumns: ColumnDef<Employee>[] = [
   {
     id: "select",
     header: ({ table }) => (
@@ -85,5 +87,19 @@ export const columns: ColumnDef<Employee>[] = [
       );
     },
   },
-  // Override stuff here
 ];
+
+// Add, or override stuff here by specify id
+const updates: ColumnDef<Employee>[] = [
+  {
+    id: "role",
+    accessorKey: "role",
+    header: ({ column }) => <DataTableColumnHeader column={column} title="Role" />,
+    cell: ({ row }) => {
+      const employee = row.original;
+      return <div>{employee?.role?.name}</div>;
+    },
+  },
+];
+
+export const columns = mergeArraysById(defaultColumns, updates);

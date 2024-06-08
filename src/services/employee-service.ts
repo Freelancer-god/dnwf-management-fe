@@ -14,7 +14,7 @@ type params = {
   limit?: number;
   order_by?: string;
   sort?: string;
-  filter?: object;
+  filter: object;
   term?: string;
 };
 
@@ -47,19 +47,19 @@ const fetchEmployeeById = async (params: GetEmployeeQueryParams) => {
 
 // Create employee
 const createEmployee = async (employee: Employee) => {
-  return await fetcher<Employee>({ url: "/employees", method: "POST", data: { ...employee } });
+  return await fetcher<Employee>({ url: "/employees/store", method: "POST", data: { ...employee } });
 };
 
 // Delete employee
 const deleteEmployee = async (id: string) => {
-  return await fetcher<Employee>({ url: `/employees/${id}`, method: "DELETE" });
+  return await fetcher<Employee>({ url: `/employees/delete/${id}`, method: "DELETE" });
 };
 
 // Edit employee
 const editEmployee = async (employee: Employee) => {
   return await fetcher<Employee>({
-    url: `/employees/${employee.id}`,
-    method: "PUT",
+    url: `/employees/update/${employee.id}`,
+    method: "POST",
     data: { ...employee },
   });
 };

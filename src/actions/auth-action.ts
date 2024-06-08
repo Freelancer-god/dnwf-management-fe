@@ -23,6 +23,7 @@ export async function login(values: LoginType) {
 
     return;
   } catch (error) {
+    console.log("🚀 ~ login ~ error:", error);
     if (error instanceof AuthError) {
       switch (error.type) {
         case "CredentialsSignin":

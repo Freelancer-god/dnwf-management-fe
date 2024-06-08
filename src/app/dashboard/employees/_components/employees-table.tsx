@@ -18,6 +18,7 @@ export function EmployeesTable<TData, TValue>({ columns, initialData, total }: D
   const { data, isFetching, isError } = useGetEmployees(initialData, {
     page: pagination.pageIndex + 1,
     limit: pagination.pageSize,
+    filter: {},
   });
 
   const table = useReactTable({

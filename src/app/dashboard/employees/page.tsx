@@ -4,7 +4,6 @@ import { EmployeesTable } from "@/app/dashboard/employees/_components/employees-
 import { auth } from "@/auth";
 import CreateButton from "@/components/create-button";
 import { fetchInitialEmployees } from "@/services/employee-service";
-import { employeeSchema } from "@/types/employee";
 
 export default async function EmployeesPage() {
   const session = await auth();

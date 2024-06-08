@@ -59,7 +59,7 @@ const deleteEmployee = async (id: string) => {
 const editEmployee = async (employee: Employee) => {
   return await fetcher<Employee>({
     url: `/employees/update/${employee.id}`,
-    method: "POST",
+    method: "PUT",
     data: { ...employee },
   });
 };

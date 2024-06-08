@@ -21,7 +21,7 @@ export const employeeSchema = z.object({
   name: z.string(),
   username: z.string(),
   password: z.string(),
-  email: z.string().nullable().optional(),
+  email: z.string().nullable(),
   phone: z.string().nullable().optional(),
   sex: z.string().nullable().optional(),
   birth_date: z.string().nullable().optional(),

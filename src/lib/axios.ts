@@ -15,6 +15,14 @@ const apiClient = axios.create({
   baseURL: `${process.env.NEXT_PUBLIC_BE_URL}/api/v1/`,
 });
 
+export const setAuthTokenAsync = async (token) => {
+  if (token) {
+    apiClient.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  } else {
+    delete apiClient.defaults.headers.common["Authorization"];
+  }
+};
+
 export const setAuthToken = (token): void => {
   if (token) {
     apiClient.defaults.headers.common["Authorization"] = `Bearer ${token}`;

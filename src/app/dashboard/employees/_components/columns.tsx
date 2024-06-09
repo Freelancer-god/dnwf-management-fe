@@ -14,26 +14,11 @@ import { MoreHorizontal } from "lucide-react";
 import { DataTableColumnHeader } from "@/components/table/data-table-column-header";
 import { Employee, employeeSchema } from "@/types/employee";
 import { Checkbox } from "@/components/ui/checkbox";
-import { ZodObject } from "zod";
-import { capitalize, mergeArraysById } from "@/lib/utils";
+import { mergeArraysById } from "@/lib/utils";
 import DeleteEmployeeForm from "@/app/dashboard/employees/_components/delete-employee-form";
 import DropDownModalWrapper from "@/components/dropdown/dropdown-modal-wrapper";
 import EmployeeForm from "@/app/dashboard/employees/_components/employee-form";
-import { READ_FIELDS_EXCLUDE } from "@/lib/constants";
-
-function dynamicColumns(schema: ZodObject<any>) {
-  return Object.entries(schema.shape)
-    .map(([key, value]) => {
-      if (READ_FIELDS_EXCLUDE.includes(key)) return null;
-
-      return {
-        id: key,
-        accessorKey: key,
-        header: ({ column }) => <DataTableColumnHeader column={column} title={capitalize(key)} />,
-      };
-    })
-    .filter((column) => column !== null) as ColumnDef<Employee>[];
-}
+import { dynamicColumns } from "@/components/table/dynamic-column";
 
 const defaultColumns: ColumnDef<Employee>[] = [
   {
@@ -55,7 +40,7 @@ const defaultColumns: ColumnDef<Employee>[] = [
     enableSorting: false,
     enableHiding: false,
   },
-  ...dynamicColumns(employeeSchema),
+  ...dynamicColumns<Employee>(employeeSchema),
   {
     id: "actions",
     cell: ({ row }) => {
@@ -72,10 +57,10 @@ const defaultColumns: ColumnDef<Employee>[] = [
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuItem onClick={() => navigator.clipboard.writeText(employee.id)}>
-              Copy employee ID
+              Copy Employee ID
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>View customer</DropdownMenuItem>
+            <DropdownMenuItem>View Employee</DropdownMenuItem>
             <DropDownModalWrapper label="Edit">
               <EmployeeForm type="Edit" initialData={employee} />
             </DropDownModalWrapper>

@@ -4,6 +4,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Control } from "react-hook-form";
 import React from "react";
+import { DateTimePicker } from "@/components/form/flexible-date-picker";
+import { snakeToHumanReadable, unwrapZodSchema } from "@/lib/utils";
 
 export function GenericFormField({
   name,
@@ -21,6 +23,9 @@ export function GenericFormField({
       return React.cloneElement(overrideComponent, props);
     }
 
+    schema = unwrapZodSchema(schema);
+
+    if (schema instanceof z.ZodDate) return <DateTimePicker label={name} name={name} id={name} {...props} />;
     if (schema instanceof z.ZodString) return <Input name={name} id={name} type="text" {...props} />;
     if (schema instanceof z.ZodNumber) return <Input name={name} id={name} type="number" {...props} />;
     if (schema instanceof z.ZodEnum) {
@@ -48,7 +53,7 @@ export function GenericFormField({
       name={name}
       render={({ field }) => (
         <FormItem>
-          <FormLabel className="capitalize">{name}</FormLabel>
+          <FormLabel className="capitalize">{snakeToHumanReadable(name)}</FormLabel>
           <FormControl>{getFieldComponent(field)}</FormControl>
           <FormMessage />
         </FormItem>

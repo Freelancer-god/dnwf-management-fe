@@ -1,13 +1,14 @@
 import { fetcher } from "@/lib/axios";
+import { deepEqual } from "@/lib/utils";
 import { Employee } from "@/types/employee";
-import { DefaultRequestParams } from "@/types/request-params";
+import { defaultParams } from "@/types/request-params";
 import { keepPreviousData, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 // Define the query keys
 const QUERY_KEY = "Employee";
 
 // Fetch all employees
-export const fetchInitialEmployees = async (params: DefaultRequestParams, headers?: any) => {
+export const fetchInitialEmployees = async ({ params = defaultParams, headers }) => {
   const res = await fetcher<Employee[]>({
     url: "/employees/search",
     method: "POST",
@@ -18,7 +19,7 @@ export const fetchInitialEmployees = async (params: DefaultRequestParams, header
 };
 
 // Fetch all employees
-export const fetchEmployees = async (params: DefaultRequestParams) => {
+export const fetchEmployees = async (params = defaultParams) => {
   const res = await fetcher<Employee[]>({
     url: "/employees/search",
     method: "POST",
@@ -53,12 +54,16 @@ const editEmployee = async (employee: Employee) => {
 };
 
 // Define the hook to get all employees
-export const useGetEmployees = (initialData: Employee[], params: DefaultRequestParams) => {
+export const useGetEmployees = (initialData: Employee[], params = defaultParams) => {
   return useQuery({
     queryKey: [QUERY_KEY, params],
     queryFn: () => fetchEmployees(params),
     placeholderData: keepPreviousData, // The data from the last successful fetch is available while new data is being requested
-    initialData: () => (params.page === 1 ? initialData : undefined), // first data will be fetched from server side
+    initialData: () => {
+      // first data will be fetched from server side
+      const isInitialParams = deepEqual(params, defaultParams);
+      return isInitialParams ? initialData : undefined;
+    },
   });
 };
 

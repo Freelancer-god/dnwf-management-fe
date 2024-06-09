@@ -7,12 +7,11 @@ import { fetchInitialEmployees } from "@/services/employee-service";
 
 export default async function EmployeesPage() {
   const session = await auth();
-  const { data: employees, total } = await fetchInitialEmployees(
-    { page: 1, limit: 10, filter: {} },
-    {
+  const { data: employees, total } = await fetchInitialEmployees({
+    headers: {
       Authorization: `Bearer ${session?.accessToken}`,
     },
-  );
+  });
 
   return (
     <>

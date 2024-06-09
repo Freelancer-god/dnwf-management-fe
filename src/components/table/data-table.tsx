@@ -17,16 +17,22 @@ type DataTableProps<TData, TValue> = {
   table: import("@tanstack/table-core").Table<TData>;
   columns: ColumnDef<TData, TValue>[];
   isLoading: boolean;
+  filterField?: string;
 };
 
-export default function DataTable<TData, TValue>({ table, columns, isLoading }: DataTableProps<TData, TValue>) {
+export default function DataTable<TData, TValue>({
+  table,
+  columns,
+  isLoading,
+  filterField = "email",
+}: DataTableProps<TData, TValue>) {
   return (
     <div className="w-full">
       <div className="flex items-center py-4">
         <Input
           placeholder="Filter emails..."
-          value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
-          onChange={(event) => table.getColumn("email")?.setFilterValue(event.target.value)}
+          value={(table.getColumn(filterField)?.getFilterValue() as string) ?? ""}
+          onChange={(event) => table.getColumn(filterField)?.setFilterValue(event.target.value)}
           className="max-w-sm"
         />
         <DropdownMenu>

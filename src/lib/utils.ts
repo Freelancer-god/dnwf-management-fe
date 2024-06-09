@@ -1,5 +1,6 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
+import { ZodNullable, ZodOptional, z } from "zod";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -25,6 +26,16 @@ export const capitalize = (s: string) => {
   if (typeof s !== "string") return "";
   return s.charAt(0).toUpperCase() + s.slice(1);
 };
+
+export function snakeToHumanReadable(snakeStr: string): string {
+  // Split the string by underscores
+  const words = snakeStr.split("_");
+
+  // Capitalize the first letter of each word and join them with a space
+  const humanReadable = words.map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join(" ");
+
+  return humanReadable;
+}
 
 export const truncate = (str: string, num: number) => {
   if (!str) return "";
@@ -96,4 +107,12 @@ export function mergeArraysById(first, updates) {
   });
 
   return result;
+}
+
+export function unwrapZodSchema(schema) {
+  while (schema instanceof ZodOptional || schema instanceof ZodNullable) {
+    schema = schema.unwrap();
+  }
+
+  return schema;
 }

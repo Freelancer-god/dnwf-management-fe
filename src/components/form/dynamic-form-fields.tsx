@@ -1,5 +1,5 @@
 "use client";
-import { GenericFormField } from "@/components/form/form-field";
+import { GenericFormField } from "@/components/form/generic-form-field";
 import { CREATE_EDIT_FIELDS_EXCLUDE } from "@/lib/constants";
 import { Control } from "react-hook-form";
 import { ZodObject, ZodTypeAny } from "zod";

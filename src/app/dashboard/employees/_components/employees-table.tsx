@@ -15,7 +15,7 @@ interface DataTableProps<TData, TValue> {
 
 export function EmployeesTable<TData, TValue>({ columns, initialData, total }: DataTableProps<TData, TValue>) {
   const { pagination, onPaginationChange } = usePagination();
-  const { data, isFetching, isError } = useGetEmployees(initialData, {
+  const { data, isFetching } = useGetEmployees(initialData, {
     page: pagination.pageIndex + 1,
     limit: pagination.pageSize,
     filter: {},

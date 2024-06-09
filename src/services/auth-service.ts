@@ -1,8 +1,8 @@
 import { UserProfile } from "@/types/user-profile";
-import { fetcherLogin } from "@/lib/axios";
+import { fetcher } from "@/lib/axios";
 
 export const login = async ({ username, password }) => {
-  return await fetcherLogin<{
+  return await fetcher<{
     data: UserProfile;
     token: string;
   }>({

@@ -16,7 +16,6 @@ export default function EmployeeForm({ type, initialData = {} }: { type: "Create
     resolver: zodResolver(employeeSchema),
     defaultValues: initialData,
   });
-  console.log("🚀 ~ EmployeeForm ~ form:", form.formState.errors);
 
   const handleSubmit = (values: Employee) => {
     if (type === "Create") mutateCreate(values);

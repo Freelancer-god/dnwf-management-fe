@@ -1,25 +1,13 @@
 import { fetcher } from "@/lib/axios";
 import { Employee } from "@/types/employee";
+import { DefaultRequestParams } from "@/types/request-params";
 import { keepPreviousData, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 // Define the query keys
 const QUERY_KEY = "Employee";
 
-type GetEmployeeQueryParams = {
-  employeeId: string;
-};
-
-type params = {
-  page?: number;
-  limit?: number;
-  order_by?: string;
-  sort?: string;
-  filter: object;
-  term?: string;
-};
-
 // Fetch all employees
-export const fetchInitialEmployees = async (params: params, headers?: any) => {
+export const fetchInitialEmployees = async (params: DefaultRequestParams, headers?: any) => {
   const res = await fetcher<Employee[]>({
     url: "/employees/search",
     method: "POST",
@@ -30,7 +18,7 @@ export const fetchInitialEmployees = async (params: params, headers?: any) => {
 };
 
 // Fetch all employees
-export const fetchEmployees = async (params: params) => {
+export const fetchEmployees = async (params: DefaultRequestParams) => {
   const res = await fetcher<Employee[]>({
     url: "/employees/search",
     method: "POST",
@@ -40,8 +28,8 @@ export const fetchEmployees = async (params: params) => {
 };
 
 // Fetch a employee by ID
-const fetchEmployeeById = async (params: GetEmployeeQueryParams) => {
-  const res = await fetcher<Employee>({ url: `/employees/${params.employeeId}`, method: "GET" });
+const fetchEmployeeById = async (id: string) => {
+  const res = await fetcher<Employee>({ url: `/employees/${id}`, method: "GET" });
   return res.data.data;
 };
 
@@ -65,7 +53,7 @@ const editEmployee = async (employee: Employee) => {
 };
 
 // Define the hook to get all employees
-export const useGetEmployees = (initialData: Employee[], params: params) => {
+export const useGetEmployees = (initialData: Employee[], params: DefaultRequestParams) => {
   return useQuery({
     queryKey: [QUERY_KEY, params],
     queryFn: () => fetchEmployees(params),
@@ -75,10 +63,10 @@ export const useGetEmployees = (initialData: Employee[], params: params) => {
 };
 
 // Define the hook to get a employee by ID
-export const useGetEmployee = (params: GetEmployeeQueryParams) => {
+export const useGetEmployee = (id: string) => {
   return useQuery({
-    queryKey: [QUERY_KEY, params],
-    queryFn: () => fetchEmployeeById(params),
+    queryKey: [QUERY_KEY, id],
+    queryFn: () => fetchEmployeeById,
   });
 };
 

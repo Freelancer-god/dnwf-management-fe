@@ -14,7 +14,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
           <div className="hidden border-r bg-muted/40 md:block">
             <AdminSidebar />
           </div>
-          <div className="flex flex-col">
+          <div className="flex min-h-0 min-w-0 flex-col">
             <AdminHeader MobileSideBar={<AdminMobileSidebar />} />
             <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">{children}</main>
           </div>

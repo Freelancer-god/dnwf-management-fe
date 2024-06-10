@@ -11,8 +11,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { MoreHorizontal } from "lucide-react";
-import { DataTableColumnHeader } from "@/components/table/data-table-column-header";
-import { roleSchema } from "@/types/role";
+import { Role, roleSchema } from "@/types/role";
 import { Checkbox } from "@/components/ui/checkbox";
 import { mergeArraysById } from "@/lib/utils";
 import DeleteRoleForm from "@/app/dashboard/roles/_components/delete-role-form";

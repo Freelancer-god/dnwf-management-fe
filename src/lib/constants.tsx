@@ -29,6 +29,11 @@ export const SIDEBAR_ITEMS: MenuItem[] = [
     label: "Employee",
     icon: <User className="h-4 w-4" />,
   },
+  {
+    href: "/dashboard/roles",
+    label: "Roles",
+    icon: <User className="h-4 w-4" />,
+  },
 ];
 
 export const CREATE_EDIT_FIELDS_EXCLUDE = ["id", "updated_at", "created_at", "last_login_at", "role"];

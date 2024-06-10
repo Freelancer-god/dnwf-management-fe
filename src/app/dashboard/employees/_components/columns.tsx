@@ -40,7 +40,6 @@ const defaultColumns: ColumnDef<Employee>[] = [
     enableSorting: false,
     enableHiding: false,
   },
-  ...dynamicColumns<Employee>(employeeSchema),
   {
     id: "actions",
     cell: ({ row }) => {
@@ -72,6 +71,7 @@ const defaultColumns: ColumnDef<Employee>[] = [
       );
     },
   },
+  ...dynamicColumns<Employee>(employeeSchema),
 ];
 
 // Add, or override stuff here by specify id

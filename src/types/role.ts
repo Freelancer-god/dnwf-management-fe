@@ -15,17 +15,6 @@ export const roleSchema = z.object({
     })
     .optional(),
   media: z.union([z.string(), z.number()]).optional(),
-
-  // name: z.string(),
-  // username: z.string(),
-  // password: z.string().nullable(),
-  // email: z.string().nullable(),
-  // phone: z.string().nullable().optional(),
-  // sex: z.string().nullable().optional(),
-  // birth_date: z.coerce.date().optional(),
-  // last_login_at: z.coerce.date().optional(),
-  // created_at: z.coerce.date().optional(),
-  // updated_at: z.coerce.date().optional(),
 });
 // .omit({ password: true });
 

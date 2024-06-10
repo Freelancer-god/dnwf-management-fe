@@ -5,9 +5,18 @@ import relativeTime from "dayjs/plugin/relativeTime"; // Import the relativeTime
 import { ColumnDef } from "@tanstack/react-table";
 import { snakeToHumanReadable, unwrapZodSchema } from "@/lib/utils";
 import { DataTableColumnHeader } from "@/components/table/data-table-column-header";
+import utc from "dayjs/plugin/utc";
+import timezone from "dayjs/plugin/timezone";
+import localeData from "dayjs/plugin/localeData";
+import "dayjs/locale/vi";
 
 export function dynamicColumns<T>(schema: ZodObject<any>) {
   dayjs.extend(relativeTime);
+  dayjs.extend(relativeTime);
+  dayjs.extend(utc);
+  dayjs.extend(timezone);
+  dayjs.extend(localeData);
+  dayjs.locale("vi");
 
   return Object.entries(schema.shape)
     .map(([key, value]) => {
@@ -24,7 +33,7 @@ export function dynamicColumns<T>(schema: ZodObject<any>) {
       if (schemaInstance instanceof ZodDate) {
         tableCol = {
           ...tableCol,
-          accessorFn: (d) => d[key] && dayjs(d[key]).fromNow(),
+          accessorFn: (d) => d[key] && dayjs(d[key]).tz("Asia/Ho_Chi_Minh").fromNow(),
         };
       }
 

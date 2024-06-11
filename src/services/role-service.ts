@@ -36,7 +36,7 @@ const fetchRoleById = async (id: string) => {
 
 // Create role
 const createRole = async (role: Role) => {
-  return await fetcher<Role>({ url: "/roles/store", method: "POST", data: { ...role } });
+  return await fetcher<Role>({ url: "/roles/store", method: "POST", data: role });
 };
 
 // Delete role
@@ -49,7 +49,7 @@ const editRole = async (role: Role) => {
   return await fetcher<Role>({
     url: `/roles/update/${role.id}`,
     method: "PUT",
-    data: { ...role },
+    data: role,
   });
 };
 

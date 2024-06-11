@@ -11,7 +11,6 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { MoreHorizontal } from "lucide-react";
-import { DataTableColumnHeader } from "@/components/table/data-table-column-header";
 import { Chihoi, chihoiSchema } from "@/types/chihoi";
 import { Checkbox } from "@/components/ui/checkbox";
 import { mergeArraysById } from "@/lib/utils";
@@ -19,6 +18,8 @@ import DeleteChihoiForm from "@/app/dashboard/chihois/_components/delete-chihoi-
 import DropDownModalWrapper from "@/components/dropdown/dropdown-modal-wrapper";
 import ChihoiForm from "@/app/dashboard/chihois/_components/chihoi-form";
 import { dynamicColumns } from "@/components/table/dynamic-column";
+import dayjs from "dayjs";
+import UploadChihoiForm from "@/app/dashboard/chihois/_components/upload-chihoi-form";
 
 const defaultColumns: ColumnDef<Chihoi>[] = [
   {
@@ -66,6 +67,9 @@ const defaultColumns: ColumnDef<Chihoi>[] = [
             <DropDownModalWrapper label="Delete" className="text-red-500">
               <DeleteChihoiForm id={chihoi.id} />
             </DropDownModalWrapper>
+            <DropDownModalWrapper label="Upload">
+              <UploadChihoiForm id={chihoi.id} />
+            </DropDownModalWrapper>
           </DropdownMenuContent>
         </DropdownMenu>
       );
@@ -76,11 +80,11 @@ const defaultColumns: ColumnDef<Chihoi>[] = [
 
 // Add, or override stuff here by specify id
 const updates: ColumnDef<Chihoi>[] = [
-  // {
-  //   id: "founding_date",
-  //   accessorKey: "founding_date",
-  //   // cell:
-  // },
+  {
+    id: "founding_date",
+    accessorFn: (d) => d["founding_date"] && dayjs(d["founding_date"]).tz("Asia/Ho_Chi_Minh").format("DD/MM/YYYY"),
+    // cell:
+  },
 ];
 
 export const columns = mergeArraysById(defaultColumns, updates);

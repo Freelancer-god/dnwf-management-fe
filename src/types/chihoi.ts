@@ -12,7 +12,7 @@ export const chihoiSchema = z.object({
   phone_zalo: z.string().regex(/^\d+$/, {
     message: "Phone number should only contain digits",
   }),
-  media: z.union([z.string(), z.number()]).optional(),
+  media: z.union([z.string(), z.number()]).nullable().optional(),
 });
 // .omit({ password: true });
 

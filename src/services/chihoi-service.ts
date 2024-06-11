@@ -36,7 +36,7 @@ const fetchChihoiById = async (id: string) => {
 
 // Create chihoi
 const createChihoi = async (chihoi: Chihoi) => {
-  return await fetcher<Chihoi>({ url: "/clubs/store", method: "POST", data: { ...chihoi } });
+  return await fetcher<Chihoi>({ url: "/clubs/store", method: "POST", data: chihoi });
 };
 
 // Delete chihoi
@@ -49,7 +49,7 @@ const editChihoi = async (chihoi: Chihoi) => {
   return await fetcher<Chihoi>({
     url: `/clubs/update/${chihoi.id}`,
     method: "PUT",
-    data: { ...chihoi },
+    data: chihoi,
   });
 };
 

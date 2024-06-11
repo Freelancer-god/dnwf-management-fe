@@ -36,7 +36,7 @@ const fetchEmployeeById = async (id: string) => {
 
 // Create employee
 const createEmployee = async (employee: Employee) => {
-  return await fetcher<Employee>({ url: "/employees/store", method: "POST", data: { ...employee } });
+  return await fetcher<Employee>({ url: "/employees/store", method: "POST", data: employee });
 };
 
 // Delete employee
@@ -49,7 +49,7 @@ const editEmployee = async (employee: Employee) => {
   return await fetcher<Employee>({
     url: `/employees/update/${employee.id}`,
     method: "PUT",
-    data: { ...employee },
+    data: employee,
   });
 };
 

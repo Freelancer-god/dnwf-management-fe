@@ -25,7 +25,11 @@ export function GenericFormField({
 
     schema = unwrapZodSchema(schema);
 
-    if (schema instanceof z.ZodDate) return <DateTimePicker label={name} name={name} id={name} {...props} />;
+    if (schema instanceof z.ZodDate) {
+      const date = props?.value ? new Date(props.value) : new Date();
+      delete props?.value;
+      return <DateTimePicker label={name} name={name} id={name} jsDate={date} {...props} />;
+    }
     if (schema instanceof z.ZodString) return <Input name={name} id={name} type="text" {...props} />;
     if (schema instanceof z.ZodNumber) return <Input name={name} id={name} type="number" {...props} />;
     if (schema instanceof z.ZodEnum) {

@@ -47,5 +47,5 @@ export function ChihoisTable<TData, TValue>({ columns, initialData, total }: Dat
     debugTable: process.env.NODE_ENV === "development",
   });
 
-  return <DataTable columns={columns} table={table} isLoading={isFetching} filterField="email" />;
+  return <DataTable columns={columns} table={table} isLoading={isFetching} filterField="name" />;
 }

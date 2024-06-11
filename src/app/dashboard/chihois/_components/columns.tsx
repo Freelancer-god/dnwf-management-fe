@@ -19,6 +19,7 @@ import DropDownModalWrapper from "@/components/dropdown/dropdown-modal-wrapper";
 import ChihoiForm from "@/app/dashboard/chihois/_components/chihoi-form";
 import { dynamicColumns } from "@/components/table/dynamic-column";
 import dayjs from "dayjs";
+import UploadChihoiForm from "@/app/dashboard/chihois/_components/upload-chihoi-form";
 
 const defaultColumns: ColumnDef<Chihoi>[] = [
   {
@@ -65,6 +66,9 @@ const defaultColumns: ColumnDef<Chihoi>[] = [
             </DropDownModalWrapper>
             <DropDownModalWrapper label="Delete" className="text-red-500">
               <DeleteChihoiForm id={chihoi.id} />
+            </DropDownModalWrapper>
+            <DropDownModalWrapper label="Upload">
+              <UploadChihoiForm id={chihoi.id} />
             </DropDownModalWrapper>
           </DropdownMenuContent>
         </DropdownMenu>

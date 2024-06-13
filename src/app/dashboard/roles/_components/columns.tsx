@@ -83,12 +83,16 @@ const updates: ColumnDef<Role>[] = [
       const role = row.original;
       const permissionGroups = role.permission_groups;
       return (
-        permissionGroups &&
-        permissionGroups.he_thong &&
-        permissionGroups.he_thong.length > 0 &&
-        permissionGroups?.he_thong?.map((permission) => {
-          return <div key={permission.id}>{permission.display_name}</div>;
-        })
+        <ul className="list-disc">
+          {permissionGroups &&
+            permissionGroups.he_thong &&
+            permissionGroups.he_thong.length > 0 &&
+            permissionGroups?.he_thong?.map((permission) => (
+              <li className="min-w-[150px]" key={permission.id}>
+                {permission.display_name}
+              </li>
+            ))}
+        </ul>
       );
     },
   },

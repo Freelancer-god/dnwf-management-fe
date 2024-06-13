@@ -48,6 +48,7 @@ export default function RoleForm({ type, initialData = {} }: { type: "Create" | 
           overrides={{
             permission_ids: (
               <MultipleSelector
+                className="w-full max-w-[400px]"
                 defaultOptions={defaultOptions}
                 placeholder="Chọn Quyền..."
                 emptyIndicator={

@@ -137,3 +137,14 @@ export function deepEqual(obj1: any, obj2: any): boolean {
 
   return true;
 }
+
+export const omitFields = (schema, fieldsToOmit) => {
+  const shape = schema.shape;
+  const newShape = Object.keys(shape).reduce((acc, key) => {
+    if (!fieldsToOmit.includes(key)) {
+      acc[key] = shape[key];
+    }
+    return acc;
+  }, {});
+  return z.object(newShape);
+};

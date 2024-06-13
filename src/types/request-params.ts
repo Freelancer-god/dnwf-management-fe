@@ -14,7 +14,7 @@ export type DefaultRequestParams = PaginationParams & FilterParams;
 
 export const defaultParams: DefaultRequestParams = {
   order_by: "id",
-  sort: "ASC",
+  sort: "DESC",
   filter: {},
   page: 1,
   limit: 10,

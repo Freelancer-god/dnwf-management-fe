@@ -6,7 +6,7 @@ import { useSession } from "next-auth/react";
 const { Dragger } = Upload;
 
 export default function ImageUpload({ onUpload }: { onUpload: any }) {
-  const session = useSession();
+  // const session = useSession();
 
   const handleSubmit = () => {};
 
@@ -31,11 +31,11 @@ export default function ImageUpload({ onUpload }: { onUpload: any }) {
       name="image"
       multiple={true}
       action={`${process.env.NEXT_PUBLIC_BE_URL}/api/v1/files/uploadImage`}
-      headers={
-        {
-          Authorization: `Bearer ${session.data?.accessToken}`,
-        } as AxiosRequestHeaders
-      }
+      // headers={
+      //   {
+      //     Authorization: `Bearer ${session.data?.accessToken}`,
+      //   } as AxiosRequestHeaders
+      // }
       onChange={handleOnChange}
       onDrop={handleOnDrop}
       //   beforeUpload={() => false} // return false so that antd doesn't upload the picture right away

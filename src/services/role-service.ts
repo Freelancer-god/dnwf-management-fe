@@ -54,12 +54,13 @@ const editRole = async (role: Role) => {
 };
 
 // Define the hook to get all roles
-export const useGetRoles = (initialData: Role[], params = defaultParams) => {
+export const useGetRoles = (initialData?: Role[], params = defaultParams) => {
   return useQuery({
     queryKey: [QUERY_KEY, params],
     queryFn: () => fetchRoles(params),
     placeholderData: keepPreviousData, // The data from the last successful fetch is available while new data is being requested
     initialData: () => {
+      if (!initialData) return undefined;
       // first data will be fetched from server side
       const isInitialParams = deepEqual(params, defaultParams);
       return isInitialParams ? initialData : undefined;

@@ -13,7 +13,7 @@ type PaginationParams = {
 export type DefaultRequestParams = PaginationParams & FilterParams;
 
 export const defaultParams: DefaultRequestParams = {
-  order_by: "id",
+  order_by: "created_at",
   sort: "DESC",
   filter: {},
   page: 1,

@@ -148,3 +148,35 @@ export const omitFields = (schema, fieldsToOmit) => {
   }, {});
   return z.object(newShape);
 };
+
+export function optional<TSchema extends z.AnyZodObject>(schema: TSchema) {
+  const entries = Object.entries(schema.shape) as [keyof TSchema["shape"], z.ZodTypeAny][];
+
+  const newProps = entries.reduce(
+    (acc, [key, value]) => {
+      acc[key] = value.optional();
+      return acc;
+    },
+    {} as {
+      [key in keyof TSchema["shape"]]: z.ZodOptional<TSchema["shape"][key]>;
+    },
+  );
+
+  return z.object(newProps);
+}
+
+export function makeOptionalPropsNullable<Schema extends z.AnyZodObject>(schema: Schema) {
+  const entries = Object.entries(schema.shape) as [keyof Schema["shape"], z.ZodTypeAny][];
+  const newProps = entries.reduce(
+    (acc, [key, value]) => {
+      acc[key] = value instanceof z.ZodOptional ? value.unwrap().nullable() : value;
+      return acc;
+    },
+    {} as {
+      [key in keyof Schema["shape"]]: Schema["shape"][key] extends z.ZodOptional<infer T>
+        ? z.ZodNullable<T>
+        : Schema["shape"][key];
+    },
+  );
+  return z.object(newProps);
+}

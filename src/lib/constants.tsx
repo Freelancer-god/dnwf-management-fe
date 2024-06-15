@@ -50,4 +50,4 @@ export const CREATE_EDIT_FIELDS_EXCLUDE = [
   "role",
   "permission_groups",
 ];
-export const READ_FIELDS_EXCLUDE = ["password", "permission_ids"];
+export const READ_FIELDS_EXCLUDE = ["password", "permission_ids", "id"];

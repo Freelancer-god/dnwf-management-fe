@@ -1,5 +1,18 @@
 import { MenuItem } from "@/types/menu-item";
-import { GroupIcon, Home, HomeIcon, User, Users, Users2 } from "lucide-react";
+import {
+  Building,
+  Building2,
+  GroupIcon,
+  Home,
+  HomeIcon,
+  Key,
+  KeySquare,
+  User,
+  Users,
+  Users2,
+  Users2Icon,
+  Wrench,
+} from "lucide-react";
 
 export const SIDEBAR_ITEMS: MenuItem[] = [
   {
@@ -9,35 +22,42 @@ export const SIDEBAR_ITEMS: MenuItem[] = [
   },
   {
     href: "#",
-    label: "users",
-    icon: <User className="h-4 w-4" />,
+    label: "Quản Lý đăng nhập",
+    icon: <KeySquare className="h-4 w-4" />,
     subItems: [
       {
-        href: "/dashboard/users",
-        label: "user list",
+        href: "/dashboard/employees",
+        label: "Employee",
         icon: <User className="h-4 w-4" />,
       },
       {
-        href: "/dashboard/agents",
-        label: "agents",
-        icon: <GroupIcon className="h-4 w-4" />,
+        href: "/dashboard/roles",
+        label: "Roles",
+        icon: <Wrench className="h-4 w-4" />,
       },
     ],
   },
   {
-    href: "/dashboard/employees",
-    label: "Employee",
-    icon: <User className="h-4 w-4" />,
-  },
-  {
-    href: "/dashboard/roles",
-    label: "Roles",
-    icon: <User className="h-4 w-4" />,
-  },
-  {
-    href: "/dashboard/chihois",
-    label: "Chi Hội",
-    icon: <Users2 className="h-4 w-4" />,
+    href: "#",
+    label: "Quản Lý chi hội",
+    icon: <Building2 className="h-4 w-4" />,
+    subItems: [
+      {
+        href: "/dashboard/chihois",
+        label: "Chi Hội",
+        icon: <Building className="h-4 w-4" />,
+      },
+      {
+        href: "/dashboard/tochucs",
+        label: "Tổ chức",
+        icon: <GroupIcon className="h-4 w-4" />,
+      },
+      {
+        href: "/dashboard/hoiviens",
+        label: "Hội viên",
+        icon: <User className="h-4 w-4" />,
+      },
+    ],
   },
 ];
 

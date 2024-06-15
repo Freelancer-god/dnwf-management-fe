@@ -41,5 +41,13 @@ export const SIDEBAR_ITEMS: MenuItem[] = [
   },
 ];
 
-export const CREATE_EDIT_FIELDS_EXCLUDE = ["id", "reference", "updated_at", "created_at", "last_login_at", "role"];
-export const READ_FIELDS_EXCLUDE = ["password"];
+export const CREATE_EDIT_FIELDS_EXCLUDE = [
+  "id",
+  "reference",
+  "updated_at",
+  "created_at",
+  "last_login_at",
+  "role",
+  "permission_groups",
+];
+export const READ_FIELDS_EXCLUDE = ["password", "permission_ids", "id"];

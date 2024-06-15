@@ -13,11 +13,13 @@ import {
 import { MoreHorizontal } from "lucide-react";
 import { Role, roleSchema } from "@/types/role";
 import { Checkbox } from "@/components/ui/checkbox";
-import { mergeArraysById } from "@/lib/utils";
+import { mergeArraysById, snakeToHumanReadable } from "@/lib/utils";
 import DeleteRoleForm from "@/app/dashboard/roles/_components/delete-role-form";
 import DropDownModalWrapper from "@/components/dropdown/dropdown-modal-wrapper";
 import RoleForm from "@/app/dashboard/roles/_components/role-form";
 import { dynamicColumns } from "@/components/table/dynamic-column";
+import { DataTableColumnHeader } from "@/components/table/data-table-column-header";
+import { PermissionGroup } from "@/types/permissionGroup";
 
 const defaultColumns: ColumnDef<Role>[] = [
   {
@@ -72,6 +74,28 @@ const defaultColumns: ColumnDef<Role>[] = [
 ];
 
 // Add, or override stuff here by specify id
-const updates: ColumnDef<Role>[] = [];
+const updates: ColumnDef<Role>[] = [
+  {
+    id: "permission_groups",
+    accessorKey: "permission_groups",
+    header: ({ column }) => <DataTableColumnHeader column={column} title={snakeToHumanReadable("Quyền")} />,
+    cell: ({ row }) => {
+      const role = row.original;
+      const permissionGroups = role.permission_groups;
+      return (
+        <ul className="list-disc">
+          {permissionGroups &&
+            permissionGroups.he_thong &&
+            permissionGroups.he_thong.length > 0 &&
+            permissionGroups?.he_thong?.map((permission) => (
+              <li className="min-w-[150px]" key={permission.id}>
+                {permission.display_name}
+              </li>
+            ))}
+        </ul>
+      );
+    },
+  },
+];
 
 export const columns = mergeArraysById(defaultColumns, updates);

@@ -36,14 +36,24 @@ export const setAuthToken = (token): void => {
  * Usage: fetcher<User[]>({ url: "/users", method: "GET" });
  */
 export const fetcher = async <T>(config: AxiosRequestConfig): Promise<ApiResponse<T>> => {
-  const { data } = await apiClient.request<T>(config);
-  const responseData = data as ApiResponse<T>;
+  try {
+    const { data } = await apiClient.request<T>(config);
+    const responseData = data as ApiResponse<T>;
 
-  if (!responseData.success) {
-    throw new ApiError(responseData.error, responseData);
+    if (!responseData.success) {
+      throw new ApiError(responseData.error, responseData);
+    }
+
+    return responseData;
+  } catch (error) {
+    console.log("🚀 ~ fetcher ~ error:", error);
+    if (axios.isAxiosError(error)) {
+      const errorMessage = error.response?.data?.error || error.message;
+      throw new ApiError(errorMessage, error.response?.data);
+    } else {
+      throw new ApiError(error.message, error);
+    }
   }
-
-  return responseData;
 };
 
 const apiClientForMockApi = axios.create({

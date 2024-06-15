@@ -64,11 +64,11 @@ const defaultColumns: ColumnDef<Chihoi>[] = [
             <DropDownModalWrapper label="Edit">
               <ChihoiForm type="Edit" initialData={chihoi} />
             </DropDownModalWrapper>
-            <DropDownModalWrapper label="Delete" className="text-red-500">
-              <DeleteChihoiForm id={chihoi.id} />
-            </DropDownModalWrapper>
             <DropDownModalWrapper label="Upload">
               <UploadChihoiForm id={chihoi.id} />
+            </DropDownModalWrapper>
+            <DropDownModalWrapper label="Delete" className="text-red-500">
+              <DeleteChihoiForm id={chihoi.id} />
             </DropDownModalWrapper>
           </DropdownMenuContent>
         </DropdownMenu>

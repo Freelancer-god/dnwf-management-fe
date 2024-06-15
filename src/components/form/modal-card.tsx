@@ -2,14 +2,7 @@
 import * as React from "react";
 
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { useModal } from "@/components/modal/provider";
 import { LoadingButton } from "@/components/ui/button-with-loading";
 import { UseFormReturn } from "react-hook-form";
@@ -27,14 +20,7 @@ type ModalCardProps = {
   isLoading?: boolean;
 };
 
-export default function ModalCard({
-  form,
-  formId,
-  children,
-  metadata,
-  onClose,
-  isLoading,
-}: ModalCardProps) {
+export default function ModalCard({ form, formId, children, metadata, onClose, isLoading }: ModalCardProps) {
   const modal = useModal();
 
   // Hide modal after submitted
@@ -46,7 +32,7 @@ export default function ModalCard({
   }, [onClose]);
 
   return (
-    <Card className="min-w-[350px]">
+    <Card className="min-w-[450px]">
       <CardHeader>
         <CardTitle>{metadata.title}</CardTitle>
         <CardDescription>{metadata.description}</CardDescription>
@@ -56,11 +42,7 @@ export default function ModalCard({
         <Button variant="outline" onClick={() => modal?.hide()}>
           Cancel
         </Button>
-        <LoadingButton
-          type="submit"
-          form={formId}
-          loading={form?.formState.isSubmitting || isLoading}
-        >
+        <LoadingButton type="submit" form={formId} loading={form?.formState.isSubmitting || isLoading}>
           {metadata.buttonLabel}
         </LoadingButton>
       </CardFooter>

@@ -8,7 +8,7 @@ import { useCreateRole, useEditRole } from "@/services/role-service";
 import DynamicFormFields from "@/components/form/dynamic-form-fields";
 import MultipleSelector, { Option } from "@/components/ui/multi-selector";
 
-export default function RoleForm({ type, initialData = {} }: { type: "Create" | "Edit"; initialData?: Role }) {
+export default function RoleForm({ type, initialData }: { type: "Create" | "Edit"; initialData?: Role }) {
   const { mutate: mutateCreate, isPending: isPendingCreate, isSuccess: isSuccessCreate } = useCreateRole();
   const { mutate: mutateEdit, isPending: isPendingEdit, isSuccess: isSuccessEdit } = useEditRole();
 
